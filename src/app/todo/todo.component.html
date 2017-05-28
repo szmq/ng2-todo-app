@@ -1,26 +1,34 @@
 <h3>Add Todo</h3>
 <form (submit) = "addTodo();">
-  <input type="text" [(ngModel)]="text" name="todo">
+  <div class="form-inline">
+  <input class="form-control" type="text" [(ngModel)]="text" name="todo">
   <button class="btn btn-default" type="submit">Add Todo</button>
+  </div>
 
-  <div *ngIf="isEmpty" class="alert alert-danger">
-    <p><strong>Error</strong> Input value is empty</p>
-  </div>
-  <div *ngIf="isAdded" class="alert alert-success">
-    <p><strong>Added</strong> task '{{ prevText }}'</p>
-  </div>
-  <div *ngIf="isUpdated" class="alert alert-success">
-    <p><strong>Updated</strong> task '{{ prevText }}'</p>
-  </div>
-   <div *ngIf="isDeleted" class="alert alert-warning">
-    <p><strong>Deleted</strong> task '{{ prevText }}'</p>
+  <div class="notification-holder">
+    <div *ngIf="isEmpty" class="alert alert-danger display-flex">
+      <p class="text-left"><strong>Error</strong> Input value is empty</p>
+      <button class="btn btn-default left-auto" (click)="isEmpty = false">X</button>
+    </div>
+    <div *ngIf="isAdded" class="alert alert-success display-flex">
+      <p class="text-left"><strong>Added</strong> task '{{ prevText }}'</p>
+      <button class="btn btn-default left-auto" (click)="isAdded = false">X</button>
+    </div>
+    <div *ngIf="isUpdated" class="alert alert-success display-flex">
+      <p class="text-left"><strong>Updated</strong> task '{{ prevText }}'</p>
+      <button class="btn btn-default left-auto" (click)="isUpdated = false">X</button>
+    </div>
+    <div *ngIf="isDeleted" class="alert alert-warning display-flex">
+      <p class="text-left"><strong>Deleted</strong> task '{{ prevText }}'</p>
+      <button class="btn btn-default left-auto" (click)="isDeleted = false">X</button>
+    </div>
   </div>
 </form>
 
 <h3>Todo List</h3>
-<ul>
-  <li *ngFor = "let todo of todo; let i = index" class="well">
-    <label id="todo-label" style="cursor: pointer" *ngIf="!isEdit[i]" (click)="isEdit[i] = true" from="name">{{ todo.text }}</label>
+<ul class="list-group" class="cursor-style todo-list">
+  <li *ngFor = "let todo of todo; let i = index" class="list-group-item">
+    <label id="todo-label" style="cursor: pointer;" *ngIf="!isEdit[i]" (click)="isEdit[i] = true" from="name">{{ todo.text }}</label>
     <input *ngIf="isEdit[i]" type="text" name="lol" [(ngModel)]="todo.text" #newtext (clickOutside)="closeTodoEdit(i, $event)" (keyup.enter)="updateTodo(i, newtext.value)">
     
     <button class="btn btn-warning" (click)="deleteTodo(i); isEdit[i] = false">X</button>
@@ -28,3 +36,8 @@
     <button *ngIf="isEdit[i]" class="btn btn-success" (click)="updateTodo(i, todo.text)">Update</button>
   </li>
 </ul>
+
+<footer>
+  <p>Made by <a href="http://szymon-ryczek.pl" rel="nofollow">Szymon Ryczek</a>. Contact me at <a href="mailto:szymon.ryczek97@gmail.com">szymon.ryczek97@gmail.co</a>.</p>
+  <p>Code released under the <a href="https://github.com/szmq/ng2-todo-app/blob/master/LICENSE">MIT License</a>.</p>
+</footer>

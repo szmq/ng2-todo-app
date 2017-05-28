@@ -25,13 +25,14 @@ export class TodoComponent implements OnInit {
   }
 
   addTodo(){
+    this.isUpdated = false;
+    this.isDeleted = false;
+    
     if(this.text != undefined && this.text != ''){
       this.prevText = this.text;
 
-      this.isEmpty = false;
-      this.isUpdated = false;
       this.isAdded = true;
-      this.isDeleted = false;
+      this.isEmpty = false;
       
       var newTodo = {
         text: this.text
@@ -40,7 +41,8 @@ export class TodoComponent implements OnInit {
       this.todo.push(newTodo)
       this._updateService.addTodo(newTodo);
       this.text = '';
-    }else{
+    }
+    else{
       this.isEmpty = true;
       this.isAdded = false;
     }

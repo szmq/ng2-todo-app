@@ -1,17 +1,30 @@
 <h3>Add Todo</h3>
-<form (submit) = "addTodo()">
+<form (submit) = "addTodo();">
   <input type="text" [(ngModel)]="text" name="todo">
-</form><br><br>
+  <button class="btn btn-default" type="submit">Add Todo</button>
 
+  <div *ngIf="isEmpty" class="alert alert-danger">
+    <p><strong>Error</strong> Input value is empty</p>
+  </div>
+  <div *ngIf="isAdded" class="alert alert-success">
+    <p><strong>Added</strong> task '{{ prevText }}'</p>
+  </div>
+  <div *ngIf="isUpdated" class="alert alert-success">
+    <p><strong>Updated</strong> task '{{ prevText }}'</p>
+  </div>
+   <div *ngIf="isDeleted" class="alert alert-warning">
+    <p><strong>Deleted</strong> task '{{ prevText }}'</p>
+  </div>
+</form>
 
 <h3>Todo List</h3>
 <ul>
   <li *ngFor = "let todo of todo; let i = index" class="well">
-    <label *ngIf="!isEdit[i]" (click)="isEdit[i] = true" from="name">{{ todo.text }}</label>
-    <input *ngIf="isEdit[i]" type="text" [ngModel]="todo.text" (ngModelChange)="updateTodo(i, $event)">
+    <label id="todo-label" style="cursor: pointer" *ngIf="!isEdit[i]" (click)="isEdit[i] = true" from="name">{{ todo.text }}</label>
+    <input *ngIf="isEdit[i]" type="text" name="lol" [(ngModel)]="todo.text" #newtext (clickOutside)="closeTodoEdit(i, $event)" (keyup.enter)="updateTodo(i, newtext.value)">
     
     <button class="btn btn-warning" (click)="deleteTodo(i); isEdit[i] = false">X</button>
-    <button *ngIf="!isEdit[i]" class="btn btn-default" (click)="isEdit[i] = true">Edit</button>
-    <button *ngIf="isEdit[i]" class="btn btn-success" (click)="isEdit[i] = false">Update</button>
+    <button id="todo-update" *ngIf="!isEdit[i]" class="btn btn-default" (click)="isEdit[i] = true">Edit</button>
+    <button *ngIf="isEdit[i]" class="btn btn-success" (click)="updateTodo(i, todo.text)">Update</button>
   </li>
 </ul>

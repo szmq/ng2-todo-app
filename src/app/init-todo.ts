@@ -12,7 +12,7 @@ export class Init {
             text: 'task 2'
         },
         {
-            text: 'task 2'
+            text: 'task 3'
         },
       ];
 

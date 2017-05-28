@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Init } from './init-todo';
 
 @Injectable()
-export class todoervice extends Init{
+export class todoService extends Init{
   todo;
 
   constructor() {
@@ -10,7 +10,7 @@ export class todoervice extends Init{
     this.load();
   }
 
-  gettodo(){
+  getTodo(){
     this.todo = JSON.parse(localStorage.getItem('todo'));
     return this.todo;
   }
@@ -21,14 +21,16 @@ export class todoervice extends Init{
     localStorage.setItem('todo', JSON.stringify(todo))
   }
 
-  deleteTodo(todoText){
+  updateTodo(id, value){
+    var todo = JSON.parse(localStorage.getItem('todo'));
+    todo[id].text = value;
+    localStorage.setItem('todo', JSON.stringify(todo))
+  }
+
+  deleteTodo(id){
     var todo = JSON.parse(localStorage.getItem('todo'));
 
-    for(let i = 0; i < todo.length; i++){
-      if(todo[i].text == todoText){
-        todo.splice(i, 1);
-      }
-    }
+    todo.splice(id, 1)
     localStorage.setItem('todo', JSON.stringify(todo))
   }
 

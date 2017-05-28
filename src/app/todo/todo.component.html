@@ -1,11 +1,17 @@
 <h3>Add Todo</h3>
 <form (submit) = "addTodo()">
   <input type="text" [(ngModel)]="text" name="todo">
-</form>
+</form><br><br>
+
 
 <h3>Todo List</h3>
 <ul>
-  <li *ngFor = "let todo of todo" class="well">
-    {{ todo.text }} <button class="btn btn-warning" (click)="deleteTodo(todo.text)">X</button>
+  <li *ngFor = "let todo of todo; let i = index" class="well">
+    <label *ngIf="!isEdit[i]" (click)="isEdit[i] = true" from="name">{{ todo.text }}</label>
+    <input *ngIf="isEdit[i]" type="text" [ngModel]="todo.text" (ngModelChange)="updateTodo(i, $event)">
+    
+    <button class="btn btn-warning" (click)="deleteTodo(i); isEdit[i] = false">X</button>
+    <button *ngIf="!isEdit[i]" class="btn btn-default" (click)="isEdit[i] = true">Edit</button>
+    <button *ngIf="isEdit[i]" class="btn btn-success" (click)="isEdit[i] = false">Update</button>
   </li>
 </ul>

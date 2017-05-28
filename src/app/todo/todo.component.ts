@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { todoervice } from '../todo.service';
+import { todoService } from '../todo.service';
 
 @Component({
   selector: 'app-todo',
@@ -9,11 +9,11 @@ import { todoervice } from '../todo.service';
 export class TodoComponent implements OnInit {
   todo;
   text;
-
-  constructor(private _todoerice: todoervice) { }
+  isEdit: string[] = [];
+  constructor(private _updateService: todoService) { }
 
   ngOnInit() {
-    this.todo = this._todoerice.gettodo();
+    this.todo = this._updateService.getTodo();
   }
 
   addTodo(){
@@ -22,16 +22,16 @@ export class TodoComponent implements OnInit {
     }
 
     this.todo.push(newTodo)
-    this._todoerice.addTodo(newTodo);
+    this._updateService.addTodo(newTodo);
   }
 
-  deleteTodo(todoText){
-    for(let i = 0; i < this.todo.length; i++){
-      if(this.todo[i].text == todoText){
-        this.todo.splice(i, 1);
-      }
-    }
+  updateTodo(id, value){
+    this.todo[id].text = value;
+    this._updateService.updateTodo(id, value);
+  }
 
-    this._todoerice.deleteTodo(todoText);
+  deleteTodo(id){
+    this.todo.splice(id, 1)
+    this._updateService.deleteTodo(id);
   }
 }

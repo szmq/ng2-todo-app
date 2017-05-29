@@ -72,10 +72,12 @@ export class TodoComponent implements OnInit {
   closeTodoEdit(id, event){
     if(event.target.id != 'todo-label' && event.target.id != 'todo-update'){
       this.isEdit[id] = false;
+      this.todo[id].text = this.prevText;
     }
   }
 
   openTodoEdit(id){
+    this.prevText = this.todo[id].text;
     for (var _i = 0; _i <= this.todo.length; _i++) {
       this.isEdit[_i] = false;
       if(_i == this.todo.length){

@@ -28,8 +28,12 @@
 <h3>Todo List</h3>
 <ul class="list-group" class="cursor-style todo-list" >
   <li *ngFor = "let todo of todo; let i = index" class="list-group-item form-inline">
-    <label id="todo-label" style="cursor: pointer;" *ngIf="!isEdit[i]" (click)="openTodoEdit(i)" from="name">{{ todo.text }}</label>
-    <input class="form-control" *ngIf="isEdit[i]" type="text" name="lol" [(ngModel)]="todo.text" #newtext (clickOutside)="closeTodoEdit(i, $event)" (keyup.enter)="updateTodo(i, newtext.value)">
+    <label id="todo-label" class="pointer" 
+          *ngIf="!isEdit[i]" (click)="openTodoEdit(i)" 
+           from="name">{{ todo.text }}</label>
+    <input class="form-control" *ngIf="isEdit[i]" type="text"  name="lol" 
+           [(ngModel)]="todo.text" #newtext (clickOutside)="closeTodoEdit(i, $event)" 
+           (keyup.enter)="updateTodo(i, newtext.value)">
     
     <button class="btn btn-warning" (click)="deleteTodo(i); isEdit[i] = false">X</button>
     <button id="todo-update" *ngIf="!isEdit[i]" class="btn btn-default" (click)="openTodoEdit(i)">Edit</button>
@@ -38,6 +42,10 @@
 </ul>
 
 <footer>
-  <p>Made by <a href="http://szymon-ryczek.pl" rel="nofollow">Szymon Ryczek</a>. Contact me at <a href="mailto:szymon.ryczek97@gmail.com">szymon.ryczek97@gmail.com</a>.</p>
-  <p>Code released under the <a href="https://github.com/szmq/ng2-todo-app/blob/master/LICENSE">MIT License</a>.</p>
+  <p>Made by <a href="http://szymon-ryczek.pl" rel="nofollow">Szymon Ryczek</a>. 
+     Contact me at <a href="mailto:szymon.ryczek97@gmail.com">szymon.ryczek97@gmail.com</a>.
+  </p>
+  <p>Code released under the 
+    <a href="https://github.com/szmq/ng2-todo-app/blob/master/LICENSE">MIT License</a>.
+  </p>
 </footer>

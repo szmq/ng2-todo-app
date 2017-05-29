@@ -7,16 +7,16 @@ import { todoService } from '../todo.service';
   styleUrls: ['./todo.component.scss']
 })
 export class TodoComponent implements OnInit {
-  todo;
-  text;
-  prevText;
+  todo: [{text: string}];
+  text: string;
+  prevText: string;
   isEmpty: boolean = false;
   isAdded: boolean = false;
   isUpdated: boolean = false;
   isDeleted: boolean = false;
   isOpen: boolean = false;
   isEdit: boolean[] = [];
-  newtext;
+  newtext: string;
   
   constructor(private _updateService: todoService) { }
 

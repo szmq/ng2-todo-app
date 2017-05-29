@@ -74,4 +74,13 @@ export class TodoComponent implements OnInit {
       this.isEdit[id] = false;
     }
   }
+
+  openTodoEdit(id){
+    for (var _i = 0; _i <= this.todo.length; _i++) {
+      this.isEdit[_i] = false;
+      if(_i == this.todo.length){
+        this.isEdit[id] = true;
+      }
+    }
+  }
 }

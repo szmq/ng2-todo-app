@@ -1,11 +1,15 @@
 <h3>Add Todo</h3>
 <form (submit) = "addTodo();">
   <div class="form-inline">
-  <input class="form-control" type="text" [(ngModel)]="text" name="todo">
-  <button class="btn btn-default" type="submit">Add Todo</button>
+    <input class="form-control" type="text" [(ngModel)]="text" name="todo">
+    <button class="btn btn-default" type="submit">Add Todo</button>
   </div>
 
   <div class="notification-holder">
+    <div *ngIf="isDefault" class="alert alert-info display-flex">
+      <p class="text-left"><strong>Todo App</strong> task manager</p>
+      <button class="btn btn-default left-auto" (click)="isDefault = false">X</button>
+    </div>
     <div *ngIf="isEmpty" class="alert alert-danger display-flex">
       <p class="text-left"><strong>Error</strong> Input value is empty</p>
       <button class="btn btn-default left-auto" (click)="isEmpty = false">X</button>
@@ -28,16 +32,21 @@
 <h3>Todo List</h3>
 <ul class="list-group" class="cursor-style todo-list" >
   <li *ngFor = "let todo of todo; let i = index" class="list-group-item form-inline">
-    <label id="todo-label" class="pointer" 
-          *ngIf="!isEdit[i]" (click)="openTodoEdit(i)" 
-           from="name">{{ todo.text }}</label>
-    <input class="form-control" *ngIf="isEdit[i]" type="text"  name="lol" 
-           [(ngModel)]="todo.text" #newtext (clickOutside)="closeTodoEdit(i, $event)" 
-           (keyup.enter)="updateTodo(i, newtext.value)">
-    
-    <button class="btn btn-warning" (click)="deleteTodo(i); isEdit[i] = false">X</button>
-    <button id="todo-update" *ngIf="!isEdit[i]" class="btn btn-default" (click)="openTodoEdit(i)">Edit</button>
-    <button *ngIf="isEdit[i]" class="btn btn-success" (click)="updateTodo(i, todo.text)">Update</button>
+    <div class="row display-flex">
+      <div class="col-xs-6">
+        <label id="todo-label" class="pointer" 
+              *ngIf="!isEdit[i]" (click)="openTodoEdit(i)" 
+              from="name">{{ todo.text }}</label>
+        <input class="form-control" *ngIf="isEdit[i]" type="text" name="lol" 
+              [(ngModel)]="todo.text" #newtext (clickOutside)="closeTodoEdit(i, $event)" 
+              (keyup.enter)="updateTodo(i, newtext.value)">
+      </div>
+      <div class="col-xs-6 text-right">
+        <button class="btn btn-warning" (click)="deleteTodo(i); isEdit[i] = false">X</button>
+        <button id="todo-update" *ngIf="!isEdit[i]" class="btn btn-default" (click)="openTodoEdit(i)">Edit</button>
+        <button *ngIf="isEdit[i]" class="btn btn-success" (click)="updateTodo(i, todo.text)">Update</button>
+      </div>
+    </div>
   </li>
 </ul>
 

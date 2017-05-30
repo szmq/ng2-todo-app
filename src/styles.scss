@@ -5,12 +5,20 @@
     align-items: center;
 }
 
+.display-inline-block{
+    display: inline-block;
+}
+
 .left-auto{
     margin-left: auto;
 }
 
 button{
     outline: none !important;
+}
+
+label{
+    margin: 0;
 }
 
 .notification-holder{

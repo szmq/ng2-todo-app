@@ -14,6 +14,7 @@ export class TodoComponent implements OnInit {
   isAdded: boolean = false;
   isUpdated: boolean = false;
   isDeleted: boolean = false;
+  isDefault: boolean = true;
   isOpen: boolean = false;
   isEdit: boolean[] = [];
   newtext: string;
@@ -27,6 +28,7 @@ export class TodoComponent implements OnInit {
   addTodo(){
     this.isUpdated = false;
     this.isDeleted = false;
+    this.isDefault = false;
     
     if(this.text != undefined && this.text != ''){
       this.prevText = this.text;
@@ -52,6 +54,7 @@ export class TodoComponent implements OnInit {
     this.isUpdated = true;
     this.isAdded = false
     this.isDeleted = false;
+    this.isDefault = false;
     this.isEmpty = false;
     this.isEdit[id] = false;
     this.prevText = value;
@@ -64,6 +67,7 @@ export class TodoComponent implements OnInit {
     this.isAdded = false
     this.isEmpty = false;
     this.isDeleted = true;
+    this.isDefault = false;
     this.prevText = this.todo[id].text;
     this.todo.splice(id, 1)
     this._updateService.deleteTodo(id);

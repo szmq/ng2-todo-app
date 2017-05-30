@@ -1,8 +1,9 @@
 # TodoApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.4.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.4.<br />
+Live: http://szymon-ryczek.pl/projekty/ng2-todo-app/
 
-<img src="http://i.imgur.com/AN2Tqz7.png" width="100%">
+<img src="http://i.imgur.com/WtJBfSd.png" width="100%">
 
 ## Development server
 
